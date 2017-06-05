@@ -2,16 +2,19 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <header-toolbar></header-toolbar>
+    <!-- <side-nav></side-nav> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import HeaderToolbar from '@/components/HeaderToolbar';
+import SideNav from '@/components/SideNav';
 export default {
   name: 'app',
   components: {
-    HeaderToolbar
+    HeaderToolbar,
+    SideNav
   }
 }
 </script>
