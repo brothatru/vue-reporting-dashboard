@@ -1,27 +1,6 @@
-<template id="side-nav">
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container"> <a href="#" class="navbar-brand hidden-xs">MyName</a>
+<template>
+  <div class="sidenav">
 
-        <button class="navbar-toggle pull-left" data-toggle="collapse" data-target=".navHeaderCollapse">    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-
-        </button>
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">ABOUT ME<span class="sr-only">(current)</span></a>
-                </li>
-                <li><a href="#">RESUME</a>
-                </li>
-                <li><a href="#">PROJECTS</a>
-                </li>
-                <li><a href="#">BLOG</a>
-                </li>
-                <li><a href="#">CONTACT</a>
-                </li>
-            </ul>
-        </div>
-    </div>
   </div>
 </template>
 
@@ -36,3 +15,19 @@ export default {
   }
 }
 </script>
+
+<style>
+/*@import "https://cdn.rawgit.com/band-x-media/SASS-Material-Design-for-Bootstrap/master/dist/material-bootstrap.min.css";*/
+/*
+* Get some ideas from this bootstrap material design website
+* http://code.band-x.media/SASS-Material-Design-for-Bootstrap/layout/navigation-drawer/
+*/
+.sidenav {
+  position:fixed;
+  top:52px;
+  left:0;
+  background-color:#333;
+  width:300px;
+  height:100%;
+}
+</style>
