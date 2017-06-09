@@ -4,19 +4,20 @@
       <div v-for="item in items">
         <a href="javascript:;" :class="{selected: item.selected}" @click="highlight(item);">
           <li>
-            <i class="fa" :class="item.icon" aria-hidden="true"></i> <span>{{item.title}}</span> <i class="fa fa-angle-down" aria-hidden="true"></i>
+            <i class="fa" :class="item.icon" aria-hidden="true"></i> <span>{{item.title}}</span> <i class="fa" :class="{'fa-angle-up': item.selected, 'fa-angle-down': !item.selected}" aria-hidden="true"></i></transition>
           </li>
         </a>
         <transition name="slide-fade">
           <ul v-if="item.selected" class="sidenav-sub-menu-ul">
             <a v-for="subItem in item.sub_menu" href="#">
               <li>
-                <i class="fa" aria-hidden="true"></i> <span>{{item.title}}</span>
+                <i class="fa" aria-hidden="true"></i> <span>{{subItem.title}}</span>
               </li>
             </a>
           </ul>
         </transition>
       </div>
+      <hr class="divider">
     </ul>
   </div>
 </template>
@@ -30,9 +31,12 @@ export default {
       items: [
         { title: "Menu Item 1", icon: "fa-pencil-square-o", link: "#",
           sub_menu: [
-            { title: "Sub-Menu Item 2", icon: "fa-hand-rock-o", link: "#" },
+            { title: "Sub-Menu Item 1", icon: "fa-hand-rock-o", link: "#" },
           ] },
-        { title: "Menu Item 2", icon: "fa-hand-rock-o", link: "#" },
+        { title: "Menu Item 2", icon: "fa-hand-rock-o", link: "#",
+          sub_menu: [
+            { title: "Sub-Menu Item 1", icon: "fa-hand-rock-o", link: "#" },
+          ] },
         { title: "Menu Item 3", icon: "fa-area-chart", link: "#" },
         { title: "Menu Item 4", icon: "fa-pie-chart", link: "#" },
         { title: "Menu Item 5", icon: "fa-line-chart", link: "#" }
@@ -41,14 +45,15 @@ export default {
   },
   methods: {
     highlight(item) {
-      // console.log(item.title + ' clicked!');
-      this.clearSelected();
-      item.selected = !item.selected;
-    },
-    clearSelected() {
-      let items = this.items;
-      for (let item of items) {
-        item.selected = false;
+      let vm = this,
+          items = vm.items;
+      for (let i of items) {
+        if (i == item) {
+          i.selected = !i.selected;
+        }
+        else if (i.selected) {
+          i.selected = false;
+        }
       }
     }
   },
@@ -68,7 +73,16 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700');
-
+a:focus, a:visited, a:hover {
+  text-decoration:none;
+}
+a:hover {
+  background-color:#222;
+}
+a.selected {
+  background-color:#222;
+  text-decoration:none;
+}
 .sidenav {
   position:fixed;
   top:52px;
@@ -80,7 +94,6 @@ export default {
   font-family: 'Roboto', sans-serif;
 }
 .sidenav-ul {
-  border:1px red dashed;
   width:100%;
   height:100%;
   list-style:none;
@@ -90,11 +103,6 @@ export default {
   display: block;
   color:#fff;
   font-size:14px;
-}
-/*.sidenav-ul > a:hover {*/
-a.selected {
-  background-color:#222;
-  text-decoration:none;
 }
 .sidenav-ul a li {
   padding:10px 0;
@@ -110,18 +118,17 @@ a.selected {
   font-size: 1.5em;
   width:70px;
 }
-.sidenav-ul a li i.fa-angle-down {
+i.fa-angle-down,
+i.fa-angle-up
+{
+  font-weight:bold;
   float: right;
-  padding: 0 20px 0 30px;
+  padding: 0 25px 0 30px;
   font-size: 1.5em;
-}
-.sidenav-ul a li span {
-
 }
 .sidenav-sub-menu-ul {
   list-style:none;
   padding:0;
-  margin-top:10px;
 }
 
 /* Enter and leave animations can use different */
@@ -132,15 +139,8 @@ a.selected {
 .slide-fade-leave-active {
   transition: all .05s ease;
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active for <2.1.8 */ {
-  /*transform: translateY(-10px);*/
-  /*opacity: 0;*/
-}
-.slide-fade-leave-to {
-  /*transform: translateY(-10px);*/
-}
 hr.divider {
-
+  margin:0;
+  border-top:1px solid #555;
 }
 </style>
